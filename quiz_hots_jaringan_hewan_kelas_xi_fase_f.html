@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian HOTS Literasi & Numerasi: Jaringan Hewan Kelas XI Fase F</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            user-select: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .no-select {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col no-select">
+
+    <!-- TOP HEADER / NAVBAR -->
+    <header id="top-header" class="bg-slate-900 text-white sticky top-0 z-50 shadow-md transition-all duration-300 hidden">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-500/20 p-2 rounded-lg border border-emerald-500/30 text-emerald-400">
+                    <i class="fa-solid fa-dna text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Ujian Biologi HOTS - POSI/TKA</h1>
+                    <p class="font-bold text-sm md:text-base text-emerald-400">Materi: Jaringan Hewan (Fase F)</p>
+                </div>
+            </div>
+
+            <!-- USER INFO BAR -->
+            <div id="user-info-bar" class="flex flex-wrap items-center gap-3 text-xs md:text-sm">
+                <div class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-user text-slate-400"></i>
+                    <span id="bar-student-name" class="font-medium text-white">-[Nama]-</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-slate-400"></i>
+                    <span id="bar-student-class" class="font-medium text-emerald-400">-[Kelas]-</span>
+                </div>
+                <div id="timer-box" class="bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono font-bold px-3 py-1.5 rounded-lg flex items-center gap-2 animate-pulse">
+                    <i class="fa-solid fa-clock"></i>
+                    <span id="time-display">90:00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+
+        <!-- STEP 1: REGISTRATION & INSTRUCTIONS VIEW -->
+        <section id="view-welcome" class="max-w-2xl mx-auto w-full bg-white rounded-2xl shadow-xl border border-slate-200/80 p-6 md:p-8 transition-all">
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 mb-4 shadow-inner">
+                    <i class="fa-solid fa-microscope text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Olimpiade & TKA Biologi</h2>
+                <p class="text-sm text-slate-500 mt-1">Ujian HOTS Literasi & Numerasi: Jaringan Hewan (40 Soal)</p>
+            </div>
+
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6 text-xs md:text-sm text-amber-900 space-y-2">
+                <p class="font-bold flex items-center gap-2 text-amber-800">
+                    <i class="fa-solid fa-triangle-exclamation"></i> PERATURAN UJIAN KETAT:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-amber-800/90 pl-1">
+                    <li>Satu akun (Kombinasi Nama & Kelas) <strong>HANYA BISA MENGERJAKAN MAXIMAL 2 KALI</strong>.</li>
+                    <li>Sistem dilengkapi <strong>Anti-Cheat Automatic Detector</strong>. Membuka tab lain, jendela lain, atau melakukan split screen akan <strong>MEMBATALKAN & LANGSUNG MENGUMPULKAN UJIAN OTOMATIS</strong>.</li>
+                    <li>Durasi waktu: <strong>90 Menit</strong> untuk 40 Soal Pilihan Ganda (5 Opsi A-E).</li>
+                    <li>Nilai akan otomatis tersimpan dalam Database Guru / Pembuat Soal.</li>
+                </ul>
+            </div>
+
+            <form id="form-login" onsubmit="startQuiz(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Lengkap Siswa</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user-pen absolute left-3.5 top-3 text-slate-400"></i>
+                        <input type="text" id="input-name" required placeholder="Masukkan Nama Lengkap Sesuai Presensi" 
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-medium outline-none transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kelas / Peminatan</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-school absolute left-3.5 top-3 text-slate-400"></i>
+                        <input type="text" id="input-class" required placeholder="Contoh: XI-Fase F 1 / XI MIPA 2" 
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-medium outline-none transition">
+                    </div>
+                </div>
+
+                <div id="attempt-info-msg" class="hidden text-xs text-slate-600 bg-slate-100 p-3 rounded-lg border border-slate-200"></div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit" id="btn-start-exam" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-emerald-600/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-play"></i> Mulai Mengerjakan Ujian
+                    </button>
+                    <button type="button" onclick="openTeacherDashboard()" class="bg-slate-800 hover:bg-slate-900 text-slate-200 font-semibold px-4 py-3 rounded-xl transition text-sm flex items-center gap-2" title="Dashboard Guru / Nilai Terkumpul">
+                        <i class="fa-solid fa-user-shield"></i> Guru
+                    </button>
+                </div>
+            </form>
+        </section>
+
+
+        <!-- STEP 2: QUIZ EXAM INTERFACE -->
+        <section id="view-quiz" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- LEFT / MAIN CONTENT: QUESTION & STIMULUS -->
+            <div class="lg:col-span-3 space-y-4">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-7 relative">
+                    
+                    <!-- Question Header Bar -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                        <span id="question-badge" class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1.5 rounded-full border border-emerald-200">
+                            Soal No. <span id="current-q-num">1</span> dari 40
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate-400 font-medium">Tingkat: HOTS / POSI-TKA</span>
+                            <button onclick="toggleBookmark()" id="btn-bookmark" class="text-slate-400 hover:text-amber-500 p-1.5 rounded-lg transition" title="Tandai Soal">
+                                <i class="fa-regular fa-bookmark text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stimulus / Narasi HOTS -->
+                    <div id="stimulus-container" class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 md:p-5 mb-5 text-slate-700 text-xs md:text-sm leading-relaxed space-y-3">
+                        <!-- Stimulus Text & Numerical Table/Data dynamic here -->
+                    </div>
+
+                    <!-- SVG Diagram / Graphical Micrograph Representation -->
+                    <div id="visual-container" class="mb-5 flex justify-center items-center bg-white border border-slate-200 rounded-xl p-3 overflow-x-auto">
+                        <!-- Dynamic SVG Graphics Generated Here -->
+                    </div>
+
+                    <!-- Question Text -->
+                    <div id="question-text" class="font-semibold text-slate-900 text-sm md:text-base leading-snug mb-6">
+                        <!-- Dynamic Question Text -->
+                    </div>
+
+                    <!-- Options A - E -->
+                    <div id="options-container" class="space-y-3">
+                        <!-- Dynamic Options A, B, C, D, E -->
+                    </div>
+
+                    <!-- Question Navigation Footers -->
+                    <div class="flex items-center justify-between pt-6 mt-6 border-t border-slate-100">
+                        <button onclick="prevQuestion()" id="btn-prev" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2.5 rounded-xl text-xs md:text-sm transition flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="nextQuestion()" id="btn-next" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs md:text-sm transition flex items-center gap-2">
+                            Selanjutnya <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR: NAVIGATOR GRID -->
+            <div class="lg:col-span-1 space-y-4">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sticky top-20">
+                    <h3 class="font-bold text-xs uppercase text-slate-500 tracking-wider mb-3 flex items-center justify-between">
+                        <span>Navigasi Soal</span>
+                        <span id="answered-count-badge" class="text-emerald-600 font-extrabold text-xs">0/40 Terjawab</span>
+                    </h3>
+
+                    <!-- Grid Buttons 1-40 -->
+                    <div id="question-grid" class="grid grid-cols-5 gap-2 max-h-[350px] overflow-y-auto custom-scrollbar p-1">
+                        <!-- Generated Dynamically -->
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs">
+                        <div class="flex items-center gap-2 text-slate-600">
+                            <span class="w-3 h-3 rounded bg-emerald-600"></span> Sudah dijawab
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-600">
+                            <span class="w-3 h-3 rounded bg-amber-400"></span> Ragu-ragu / Ditandai
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-600">
+                            <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300"></span> Belum dijawab
+                        </div>
+                    </div>
+
+                    <button onclick="confirmSubmitQuiz()" class="w-full mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-600/20 text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Selesaikan Ujian
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- STEP 3: RESULT & REVIEW VIEW -->
+        <section id="view-result" class="hidden max-w-4xl mx-auto w-full space-y-6">
+            
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 md:p-8 text-center relative overflow-hidden">
+                <div id="result-badge-bg" class="absolute -right-12 -top-12 w-40 h-40 rounded-full bg-emerald-500/10 pointer-events-none"></div>
+
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-4 shadow-inner">
+                    <i class="fa-solid fa-trophy text-4xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Hasil Ujian HOTS Biologi</h2>
+                <p id="result-student-detail" class="text-slate-500 text-sm mt-1">Siswa: - | Kelas: -</p>
+
+                <!-- Score Big Card -->
+                <div class="my-6 max-w-xs mx-auto bg-slate-900 text-white rounded-2xl p-6 shadow-xl border border-slate-800">
+                    <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Skor Akhir (Skala 100)</span>
+                    <div id="final-score-display" class="text-5xl font-black text-emerald-400 my-2">0</div>
+                    <p id="score-predicate" class="text-xs font-medium text-slate-300">Menganalisis Jawaban...</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto text-xs md:text-sm mb-6">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <span class="text-slate-400 block text-xs">Benar</span>
+                        <span id="count-correct" class="font-bold text-emerald-600 text-lg">0</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <span class="text-slate-400 block text-xs">Salah</span>
+                        <span id="count-wrong" class="font-bold text-red-500 text-lg">0</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <span class="text-slate-400 block text-xs">Kosong</span>
+                        <span id="count-empty" class="font-bold text-amber-500 text-lg">0</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <span class="text-slate-400 block text-xs">Percobaan Ke-</span>
+                        <span id="attempt-number-badge" class="font-bold text-indigo-600 text-lg">1 / 2</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="showReviewMode()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-5 rounded-xl text-xs md:text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-list-check"></i> Pembahasan Soal HOTS
+                    </button>
+                    <button onclick="location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs md:text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate"></i> Ke Halaman Utama
+                    </button>
+                </div>
+            </div>
+
+            <!-- REVIEW DISCUSSION SECTION CONTAINER -->
+            <div id="review-container" class="hidden space-y-4">
+                <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-emerald-600"></i> Pembahasan Lengkap & Kunci Jawaban
+                </h3>
+                <div id="review-list" class="space-y-4">
+                    <!-- Dynamic review items -->
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- STEP 4: TEACHER DASHBOARD MODAL/VIEW -->
+        <section id="view-teacher-dashboard" class="hidden max-w-5xl mx-auto w-full bg-white rounded-2xl shadow-xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="bg-slate-900 text-emerald-400 p-3 rounded-xl">
+                        <i class="fa-solid fa-user-shield text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Dashboard Guru / Pembuat Soal</h2>
+                        <p class="text-xs text-slate-500">Rekapitulasi Nilai & Aktivitas Anti-Cheat Siswa</p>
+                    </div>
+                </div>
+                <button onclick="closeTeacherDashboard()" class="text-slate-400 hover:text-slate-700 p-2 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div class="text-xs font-semibold text-slate-600">
+                    Total Peserta Terdaftar: <span id="total-submissions-count" class="text-emerald-600 font-bold">0</span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-excel"></i> Export Nilai (CSV)
+                    </button>
+                    <button onclick="clearAllData()" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-4 py-2 rounded-lg border border-red-200 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-trash-can"></i> Hapus Database
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase font-bold text-[11px] border-b border-slate-200">
+                            <th class="p-3">No</th>
+                            <th class="p-3">Nama Siswa</th>
+                            <th class="p-3">Kelas</th>
+                            <th class="p-3 text-center">Ke-</th>
+                            <th class="p-3 text-center">Skor</th>
+                            <th class="p-3 text-center">B/S/K</th>
+                            <th class="p-3 text-center">Status Anti-Cheat</th>
+                            <th class="p-3">Waktu Submit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teacher-table-body" class="divide-y divide-slate-200 font-medium text-slate-700">
+                        <!-- Rows populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-auto">
+        <p>© 2026 Ujian HOTS Biologi XI - Standar POSI, TKA & OSN Biologi (Fase F)</p>
+    </footer>
+
+    <!-- SCRIPT APPLICATION LOGIC & 40 QUESTION DATABASE -->
+    <script>
+        /* --- QUESTION DATABASE (40 HOTS Questions with Numeracy, Literacy & Visual Diagrams) --- */
+        const quizDatabase = [
+            {
+                id: 1,
+                stimulus: "Peneliti mengukur laju difusi O2 dan efisiensi penyerapan nutrisi pada tiga jenis epitel: Epitel Pipih Selapis (P), Epitel Kubus Selapis (Q), dan Epitel Silindris Berlapis (R). Data ketebalan jaringan dan rasio transpor zat disajikan dalam tabel berikut:\n\n• Jenis P: Ketebalan 2 µm, Laju Difusi Gas 95 AU, Akses Vaskuler Sangat Tinggi\n• Jenis Q: Ketebalan 15 µm, Laju Difusi Gas 40 AU, Aktivitas Sekresi & Reabsorpsi Sedang\n• Jenis R: Ketebalan 45 µm, Laju Difusi Gas 5 AU, Fungsi Utama Proteksi Mekanis",
+                diagramSvg: `<svg width="280" height="90" viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="25" width="70" height="8" fill="#10b981" rx="2"/><text x="45" y="50" font-size="10" text-anchor="middle" fill="#334155">Epitel P (2µm)</text>
+                    <rect x="100" y="20" width="70" height="25" fill="#3b82f6" rx="2"/><text x="135" y="60" font-size="10" text-anchor="middle" fill="#334155">Epitel Q (15µm)</text>
+                    <rect x="190" y="10" width="70" height="50" fill="#f59e0b" rx="2"/><text x="225" y="75" font-size="10" text-anchor="middle" fill="#334155">Epitel R (45µm)</text>
+                </svg>`,
+                question: "Berdasarkan prinsip hubungan struktur dan fungsi jaringan (form-follows-function), lokasi yang paling tepat untuk jaringan P, Q, dan R berturut-turut pada organ tubuh manusia adalah...",
+                options: [
+                    "A. Alveolus paru-paru, Tubulus kontortus ginjal, dan Trakea",
+                    "B. Dinding kapiler darah, Lengkung Henle, dan Kulit",
+                    "C. Alveolus paru-paru, Tubulus proksimal ginjal, dan Mukosa vagina",
+                    "D. Endotelium pembuluh darah, Vesika urinaria, dan Alveolus",
+                    "E. Mukosa lambung, Epidermis kulit, dan Alveolus paru-paru"
+                ],
+                correct: 2,
+                explanation: "Epitel P (sangat tipis, 2 µm, difusi tinggi) adalah epitel pipih selapis di Alveolus/Endotel. Epitel Q (15 µm, reabsorpsi) adalah epitel kubus selapis pada Tubulus Proksimal Ginjal. Epitel R (45 µm, proteksi) adalah epitel berlapis pada Mukosa Vagina/Esofagus."
+            },
+            {
+                id: 2,
+                stimulus: "Seorang pasien diidentifikasi mengalami kehilangan kemampuan filtrasi glomerulus akibat degradasi podosit dan lamina basalis. Analisis sampel mikroskopi elektron menunjukkan destruksi kolagen tipe IV pada matriks ekstraseluler membran basalis.",
+                diagramSvg: `<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="40" r="25" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+                    <path d="M 120 20 L 220 20 L 220 60 L 120 60 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                    <text x="170" y="45" font-size="11" font-weight="bold" text-anchor="middle" fill="#b45309">Filtrasi Rusak</text>
+                </svg>`,
+                question: "Dampak fisiologis numerik yang paling langsung terukur pada pemeriksaan urin rutin pasien tersebut adalah...",
+                options: [
+                    "A. Peningkatan konsentrasi glukosa sebesar 100% tanpa protein",
+                    "B. Kehadiran protein bermolekul besar (albumin) > 300 mg/L (Albuminuria)",
+                    "C. Penurunan pH urin menjadi sangat asam (< 4,0)",
+                    "D. Peningkatan massa jenis urin hingga dua kali lipat akibat kelebihan urea",
+                    "E. Penurunan volume urin primer hingga 0 mL/hari"
+                ],
+                correct: 1,
+                explanation: "Membran basalis epitel ginjal terdiri dari kolagen tipe IV dan heparan sulfat yang menyaring molekul berdasarkan ukuran dan muatan. Rusaknya jaringan epitel pipih selapis & lamina basalis glomerulus menyebabkan albumin lolos ke urin (Albuminuria)."
+            },
+            {
+                id: 3,
+                stimulus: "Tabel uji mikroskopis epitelium saluran pencernaan:\n• Bagian 1: Sel Silindris Selapis dengan Mikrovili (Luas permukaan meningkat 20x)\n• Bagian 2: Sel Silindris Selapis dengan Sel Goblet (Sekresi mukus tinggi)\n• Bagian 3: Epitel Berlapis Gepeng tanpa Keratin",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 20 50 Q 30 10 40 50 Q 50 10 60 50 Q 70 10 80 50" fill="none" stroke="#10b981" stroke-width="3"/>
+                    <text x="50" y="65" font-size="10" text-anchor="middle">Mikrovili (Absorpsi)</text>
+                    <rect x="150" y="20" width="80" height="30" fill="#f43f5e" rx="4"/>
+                    <text x="190" y="40" font-size="10" text-anchor="middle" fill="#fff">Sel Goblet</text>
+                </svg>`,
+                question: "Jika terjadi luka abrasi akibat makanan berstruktur kasar, bagian organ pencernaan yang memiliki daya proteksi mekanis paling adaptif adalah...",
+                options: [
+                    "A. Bagian 1 karena mikrovili dapat meredam gesekan mekanis",
+                    "B. Bagian 3 karena susunan berlapis tebal mencegah penetrasi hingga jaringan ikat bawah",
+                    "C. Bagian 2 karena sel goblet langsung menetralkan asam lambung",
+                    "D. Bagian 1 dan 2 secara bersama-sama melalui proliferasi cepat",
+                    "E. Semua bagian memiliki ketahanan mekanis yang identik"
+                ],
+                correct: 1,
+                explanation: "Epitel gepeng berlapis (Bagian 3) dirancang khusus untuk proteksi terhadap gesekan mekanis (seperti pada esofagus dan rongga mulut), mencegah luka menembus ke lamina propria."
+            },
+            {
+                id: 4,
+                stimulus: "Suatu biopsi sampel jaringan ikat padat teratur dari tendon patella pasien cedera olahraga diuji kekuatan tariknya (tensile strength). Hasil laboratorium menunjukkan stress-strain curve dengan modulus Elasticity sebesar 1.5 GPa, namun mengalami penurunan 40% pasca trauma.",
+                diagramSvg: `<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="20" y1="70" x2="220" y1="70" stroke="#64748b" stroke-width="2"/>
+                    <line x1="20" y1="70" x2="20" y1="10" stroke="#64748b" stroke-width="2"/>
+                    <path d="M 20 70 Q 100 20 200 30" fill="none" stroke="#ef4444" stroke-width="3"/>
+                    <text x="120" y="20" font-size="10" fill="#ef4444">Degradasi Kolagen</text>
+                </svg>`,
+                question: "Komponen matriks ekstraseluler jaringan ikat yang paling bertanggung jawab atas penurunan elastisitas dan kekuatan tarik tersebut adalah...",
+                options: [
+                    "A. Kerusakan serat kolagen tipe I yang tersusun sejajar paralel",
+                    "B. Hilangnya proteoglikan dan asam hialuronat dalam darah",
+                    "C. Penurunan jumlah sel lemak (adiposit) di ligamen",
+                    "D. Degenerasi serat retikulin pada jaringan ikat longgar",
+                    "E. Inaktivasi total sel mast di dalam tendon"
+                ],
+                correct: 0,
+                explanation: "Jaringan ikat padat teratur pada tendon sebagian besar terdiri atas serat kolagen tipe I yang tersusun sejajar teratur untuk menahan gaya tarik searah. Kerusakan kolagen mengurangi kekuatan tarik (tensile strength)."
+            },
+            {
+                id: 5,
+                stimulus: "Grafik perbandingan kandungan lemak cokelat (Brown Adipose Tissue / BAT) dan lemak putih (White Adipose Tissue / WAT) pada dua kelompok mamalia:\n• Kelompok A (Hibernasi): BAT 35%, WAT 65%, Ekspresi UCP-1 Tinggi (85%)\n• Kelompok B (Non-Hibernasi): BAT 3%, WAT 97%, Ekspresi UCP-1 Rendah (5%)",
+                diagramSvg: `<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="20" width="40" height="50" fill="#b45309"/><text x="50" y="15" font-size="10" text-anchor="middle">BAT A</text>
+                    <rect x="80" y="40" width="40" height="30" fill="#fef08a" stroke="#ca8a04"/><text x="100" y="35" font-size="10" text-anchor="middle">WAT A</text>
+                    <rect x="160" y="60" width="40" height="10" fill="#b45309"/><text x="180" y="55" font-size="10" text-anchor="middle">BAT B</text>
+                </svg>`,
+                question: "Peran biologis utama dari tingginya rasio BAT dan protein UCP-1 (Uncoupling Protein-1) pada mamalia kelompok A adalah...",
+                options: [
+                    "A. Menyimpan energi jangka panjang dalam bentuk trigliserida tunggal",
+                    "B. Memproduksi ATP secara maksimal melalui fosforilasi oksidatif",
+                    "C. Membocorkan proton mitokondria untuk menghasilkan panas (termogenesis) tanpa sintesis ATP",
+                    "D. Meningkatkan sekresi hormon insulin untuk menurunkan glukosa darah",
+                    "E. Mempercepat pembentukan serat kolagen pasca hipotermia"
+                ],
+                correct: 2,
+                explanation: "BAT mengandung banyak mitokondria bermioglobin dan protein UCP-1 (thermogenin) yang melepaskan gradien proton dari ATP sintase, membelokkan energi menjadi energi panas (termogenesis nonsivering)."
+            },
+            {
+                id: 6,
+                stimulus: "Seseorang mengalami luka potong di kulit. Tahapan penyembuhan jaringan ikat digambarkan dalam garis waktu numerik:\n• Hari 0-2: Inflamasi & Pendarahan (Sel Mast & Trombosit aktif)\n• Hari 3-10: Proliferasi Fibroblas & Sintesis Matriks (Kolagen Tipe III)\n• Hari 11-21: Remodeling Matriks (Pengantian Kolagen Tipe III menjadi Tipe I)",
+                diagramSvg: `<svg width="280" height="70" viewBox="0 0 280 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="35" r="18" fill="#fca5a5"/><text x="40" y="39" font-size="9" font-weight="bold" text-anchor="middle">H 0-2</text>
+                    <line x1="60" y1="35" x2="100" y1="35" stroke="#94a3b8" stroke-dasharray="4"/>
+                    <circle cx="120" cy="35" r="18" fill="#fde047"/><text x="120" y="39" font-size="9" font-weight="bold" text-anchor="middle">H 3-10</text>
+                    <line x1="140" y1="35" x2="180" y1="35" stroke="#94a3b8" stroke-dasharray="4"/>
+                    <circle cx="200" cy="35" r="18" fill="#86efac"/><text x="200" y="39" font-size="9" font-weight="bold" text-anchor="middle">H 11-21</text>
+                </svg>`,
+                question: "Jika terjadi defisiensi Vitamin C kronis selama fase proliferasi (Hari 3-10), dampak molecular yang terjadi pada fibroblas adalah...",
+                options: [
+                    "A. Fibroblas tidak mampu membelah secara mitosis sama sekali",
+                    "B. Kegagalan hidroksilasi prolin dan meprolin pada tropokolagen sehingga serat kolagen rapuh",
+                    "C. Sel mast berhenti memproduksi histamin sehingga pendarahan bertambah hebat",
+                    "D. Transformasi fibroblas menjadi osteoblas secara mendadak",
+                    "E. Inaktivasi total enzim kolagenase selama fase remodeling"
+                ],
+                correct: 1,
+                explanation: "Vitamin C adalah kofaktor krusial bagi enzim prolyl hydroxylase yang menghidroksilasi prolin pada prekursor kolagen. Tanpa vitamin C, serat kolagen tidak stabil secara termal dan jaringan parut gagal terbentuk kuat (skorbut)."
+            },
+            {
+                id: 7,
+                stimulus: "Analisis tiga sampel kartilago (P, Q, R) dari tubuh manusia:\n• Sampel P: Matriks bening kebiruan, kaya kondroitin sulfat & serat kolagen tipe II halus. Lokasi: Ujung tulang rusuk.\n• Sampel Q: Kaya serat elastin bercabang, sangat lentur. Lokasi: Epiglottis dan daun telinga.\n• Sampel R: Matriks gelap dipadati berkas kolagen tipe I tebal, tahan tekanan mekanis tinggi. Lokasi: Meniscus lutut.",
+                diagramSvg: `<svg width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="20" width="70" height="45" fill="#e0f2fe" stroke="#38bdf8" rx="6"/><text x="45" y="45" font-size="10" text-anchor="middle">P (Hialin)</text>
+                    <rect x="100" y="20" width="70" height="45" fill="#fef9c3" stroke="#eab308" rx="6"/><text x="135" y="45" font-size="10" text-anchor="middle">Q (Elastis)</text>
+                    <rect x="190" y="20" width="70" height="45" fill="#f1f5f9" stroke="#64748b" rx="6"/><text x="225" y="45" font-size="10" text-anchor="middle">R (Fibro)</text>
+                </svg>`,
+                question: "Identifikasi jenis tulang rawan P, Q, dan R berturut-turut adalah...",
+                options: [
+                    "A. Kartilago Hialin, Kartilago Elastis, dan Fibrokartilago",
+                    "B. Fibrokartilago, Kartilago Hialin, dan Kartilago Elastis",
+                    "C. Kartilago Elastis, Fibrokartilago, dan Kartilago Hialin",
+                    "D. Kartilago Hialin, Fibrokartilago, dan Kartilago Elastis",
+                    "E. Fibrokartilago, Kartilago Elastis, dan Kartilago Hialin"
+                ],
+                correct: 0,
+                explanation: "Sampel P = Kartilago Hialin (rusuk/persendian), Sampel Q = Kartilago Elastis (epiglottis/telinga), Sampel R = Fibrokartilago (meniscus/diskus intervertebralis)."
+            },
+            {
+                id: 8,
+                stimulus: "Gambar skematis Sistem Havers (Osteon) pada jaringan tulang keras:\nTerdiri atas Saluran Havers (1), Lakuna memuat Osteosit (2), Kanalikuli (3), dan Lamela konsentris (4).",
+                diagramSvg: `<svg width="240" height="90" viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="120" cy="45" r="40" fill="none" stroke="#64748b" stroke-width="2"/>
+                    <circle cx="120" cy="45" r="25" fill="none" stroke="#64748b" stroke-width="2"/>
+                    <circle cx="120" cy="45" r="10" fill="#ef4444"/>
+                    <text x="120" y="49" font-size="8" fill="#fff" text-anchor="middle">1</text>
+                    <circle cx="100" cy="35" r="4" fill="#10b981"/>
+                    <text x="92" y="32" font-size="8">2</text>
+                    <line x1="100" y1="35" x2="110" y1="40" stroke="#10b981" stroke-width="1.5"/>
+                    <text x="105" y="25" font-size="8">3</text>
+                </svg>`,
+                question: "Fungsi utama struktur nomor (3) / Kanalikuli yang menghubungkan lakuna satu dengan lakuna lainnya adalah...",
+                options: [
+                    "A. Menjadi tempat pembentukan sel-sel darah merah baru",
+                    "B. Saluran nutrisi, O2, dan pertukaran zat sisa metabolisme antarositosit melalui gap junction",
+                    "C. Menyimpan cadangan kalsium fosfat cair di luar matriks",
+                    "D. Tempat melekatnya otot rangka pada matriks tulang keras",
+                    "E. Menghasilkan matriks kolagen tipe I baru secara terus menerus"
+                ],
+                correct: 1,
+                explanation: "Kanalikuli adalah saluran sitoplasma mikroskopis yang menghubungkan osteosit dalam lakuna dengan pembuluh darah di saluran Havers (1) untuk pasokan nutrisi dan gas."
+            },
+            {
+                id: 9,
+                stimulus: "Data laboratorium dinamika remodeling tulang pasca pemberian dua jenis hormon:\n• Hormon X: Meningkatkan aktivitas osteoblas sebesar 180%, menurunkan reabsorpsi Ca2+ di tulang.\n• Hormon Y: Meningkatkan aktivitas osteoklas sebesar 250%, merangsang pelepasan Ca2+ ke dalam darah.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 30 50 L 80 20 L 130 50" fill="none" stroke="#10b981" stroke-width="3"/>
+                    <text x="80" y="65" font-size="10" text-anchor="middle">Hormon X (Kalsitonin)</text>
+                    <path d="M 150 20 L 200 50 L 250 20" fill="none" stroke="#ef4444" stroke-width="3"/>
+                    <text x="200" y="65" font-size="10" text-anchor="middle">Hormon Y (PTH)</text>
+                </svg>`,
+                question: "Identifikasi hormon X dan Y serta efeknya terhadap kadar kalsium darah yang tepat adalah...",
+                options: [
+                    "A. Hormon X = Parathormon (PTH); Hormon Y = Kalsitonin",
+                    "B. Hormon X = Kalsitonin (menurunkan kalsium darah); Hormon Y = Parathormon/PTH (meningkatkan kalsium darah)",
+                    "C. Hormon X = Tiroksin; Hormon Y = Insulin",
+                    "D. Hormon X = Estrogen; Hormon Y = Progesteron",
+                    "E. Hormon X = Somatotropin; Hormon Y = Aldosteron"
+                ],
+                correct: 1,
+                explanation: "Kalsitonin merangsang osteoblas mengendapkan Ca2+ ke tulang (menurunkan kalsium darah). Parathormon (PTH) merangsang osteoklas merombak tulang (meningkatkan kalsium darah)."
+            },
+            {
+                id: 10,
+                stimulus: "Hasil uji laboratorium darah seorang atlet lari maraton setelah menyelesaikan balapan 42 km:\n• Jumlah Eritrosit: 5,2 x 10^6 sel/µL (Normal)\n• Hematokrit: 54% (Meningkat dari baseline 45%)\n• Volume Plasma: Menurun 18%\n• Kadar Laktat Darah: 8,5 mmol/L",
+                diagramSvg: `<svg width="250" height="80" viewBox="0 0 250 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="40" y="10" width="30" height="60" fill="#e2e8f0" stroke="#64748b"/>
+                    <rect x="40" y="40" width="30" height="30" fill="#ef4444"/>
+                    <text x="80" y="30" font-size="10">Normal (Ht 45%)</text>
+                    <rect x="160" y="10" width="30" height="60" fill="#e2e8f0" stroke="#64748b"/>
+                    <rect x="160" y="28" width="30" height="42" fill="#ef4444"/>
+                    <text x="200" y="30" font-size="10">Pasca Maraton (Ht 54%)</text>
+                </svg>`,
+                question: "Penyebab utama peningkatan nilai hematokrit (persentase volume eritrosit terhadap total volume darah) pada atlet tersebut adalah...",
+                options: [
+                    "A. Proliferasi eritrosit secara besar-besaran di sumsum tulang dalam kurun waktu 2 jam",
+                    "B. Hemokonsentrasi akibat kehilangan cairan plasma melalui keringat (dehidrasi)",
+                    "C. Kerusakan trombosit yang memicu penggumpalan sel darah merah",
+                    "D. Penurunan sintesis eritropoietin oleh ginjal secara drastis",
+                    "E. Mutasi hemoglobin menjadi molekul hemoglobin S"
+                ],
+                correct: 1,
+                explanation: "Dehidrasi akibat berkeringat mengurangi volume plasma darah tanpa mengubah jumlah absolut eritrosit secara instan, sehingga rasio hematokrit meningkat (hemokonsentrasi relatif)."
+            },
+            {
+                id: 11,
+                stimulus: "Hasil pemeriksaan hitung jenis leukosit (differential count) pasien suspect infeksi cacing usus parasite (Helminthiasis):\n• Neutrofil: 45% (Normal 50-70%)\n• Eosinofil: 16% (Normal 1-4%)\n• Basofil: 0,5% (Normal 0,5-1%)\n• Limfosit: 30% (Normal 20-40%)\n• Monosit: 8.5% (Normal 2-8%)",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="35" r="22" fill="#fecdd3" stroke="#e11d48" stroke-width="2"/>
+                    <circle cx="53" cy="30" r="7" fill="#881337"/>
+                    <circle cx="67" cy="30" r="7" fill="#881337"/>
+                    <text x="100" y="40" font-size="11" font-weight="bold" fill="#be123c">Eosinofil Lonjak 16%</text>
+                </svg>`,
+                question: "Peningkatan signifikan persentase Eosinofil (Eosinofilia) pada kasus ini disebabkan oleh fungsi spesifiknya yaitu...",
+                options: [
+                    "A. Memproduksi antibodi spesifik IgG dan IgM secara masif",
+                    "B. Melepaskan granula toksik (Major Basic Protein) dan reaktan oksigen untuk menghancurkan parasit mukoseluler besar",
+                    "C. Fagositosis bakteri gram positif pada nodus limfa",
+                    "D. Melepaskan histamin untuk memperlebar pembuluh darah kapiler",
+                    "E. Mengubah diri menjadi makrofag dewasa di jaringan ikat"
+                ],
+                correct: 1,
+                explanation: "Eosinofil terspesialisasi untuk melawan infeksi parasit cacing besar dengan melepaskan enzim terlarut seperti Major Basic Protein (MBP) dan merangsang reaksi alergi/inflamasi."
+            },
+            {
+                id: 12,
+                stimulus: "Proses pembekuan darah (Kaskade Koagulasi) melibatkan konversi protein plasma. Suatu eksperimen memblokir aktivitas ion Ca2+ (Faktor IV) dan senyawa Tromboplastin (Faktor III).",
+                diagramSvg: `<svg width="280" height="70" viewBox="0 0 280 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="20" width="70" height="30" fill="#cbd5e1" rx="4"/><text x="45" y="38" font-size="9" text-anchor="middle">Protrombin</text>
+                    <path d="M 85 35 L 115 35" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow)"/>
+                    <text x="100" y="20" font-size="8" fill="#ef4444" text-anchor="middle">X Ca2+</text>
+                    <rect x="120" y="20" width="60" height="30" fill="#fca5a5" rx="4"/><text x="150" y="38" font-size="9" text-anchor="middle">Trombin</text>
+                    <path d="M 185 35 L 215 35" stroke="#94a3b8" stroke-width="2"/>
+                    <rect x="220" y="20" width="50" height="30" fill="#86efac" rx="4"/><text x="245" y="38" font-size="9" text-anchor="middle">Fibrin</text>
+                </svg>`,
+                question: "Tahapan kaskade koagulasi yang dipastikan terhenti secara total akibat intervensi tersebut adalah...",
+                options: [
+                    "A. Konversi fibrinogen menjadi benang-benang fibrin oleh trombin",
+                    "B. Perubahan protrombin menjadi trombin aktif",
+                    "C. Pengeluaran serotonin oleh trombosit pecah",
+                    "D. Sintesis vitamin K di dalam organ hati",
+                    "E. Retraksi bekuan darah oleh filamen aktin trombosit"
+                ],
+                correct: 1,
+                explanation: "Ion Ca2+ dan tromboplastin (Jalur Ekstrinsik/Intrinsik) diperlukan untuk mengaktifkan enzim protrombinase yang merubah protrombin menjadi trombin."
+            },
+            {
+                id: 13,
+                stimulus: "Pengamatan tiga jenis preparat otot (A, B, C) di bawah mikroskop cahaya:\n• Otot A: Sel berbentuk silindris panjang, bercabang, inti 1-2 di tengah, memiliki diskus interkalaris (intercalated disc).\n• Otot B: Sel berbentuk gelendong (fusiform), inti 1 di tengah, tidak ada garis gelap-terang (lurik).\n• Otot C: Sel silindris sangat panjang, tidak bercabang, inti banyak (multinuklei) di tepi sel.",
+                diagramSvg: `<svg width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="20" width="70" height="40" fill="#fda4af" stroke="#e11d48"/><text x="45" y="45" font-size="9" text-anchor="middle">A (Diskus+)</text>
+                    <path d="M 100 40 Q 135 20 170 40 Q 135 60 100 40 Z" fill="#fed7aa" stroke="#f97316"/><text x="135" y="43" font-size="9" text-anchor="middle">B (Gelendong)</text>
+                    <rect x="190" y="20" width="70" height="40" fill="#cbd5e1" stroke="#475569"/><text x="225" y="45" font-size="9" text-anchor="middle">C (Multinuklei)</text>
+                </svg>`,
+                question: "Karakteristik kerja dan lokasi organ dari Otot A, B, dan C berturut-turut adalah...",
+                options: [
+                    "A. Otot A: Involunter/Jantung; Otot B: Involunter/Lambung-Usus; Otot C: Volunter/Otot Rangka",
+                    "B. Otot A: Volunter/Jantung; Otot B: Involunter/Pembuluh Darah; Otot C: Involunter/Biceps",
+                    "C. Otot A: Involunter/Rangka; Otot B: Volunter/Usus; Otot C: Involunter/Jantung",
+                    "D. Otot A: Volunter/Rangka; Otot B: Volunter/Jantung; Otot C: Involunter/Usus",
+                    "E. Otot A: Involunter/Dinding Pembuluh; Otot B: Volunter/Jantung; Otot C: Volunter/Skelet"
+                ],
+                correct: 0,
+                explanation: "Otot A = Otot Jantung (Diskus interkalaris, otonom/involunter). Otot B = Otot Polos (gelendong, polosan, organ dalam/involunter). Otot C = Otot Rangka/Skelet (multinuklei tepi, teratur/volunter)."
+            },
+            {
+                id: 14,
+                stimulus: "Skema mikrostruktur Sarkomer pada otot lurik saat dalam keadaan relaksasi versus kontraksi penuh:\n• Pita I: Daerah filament tipis (aktin) tanpa miosin.\n• Pita A: Panjang filament tebal (miosin).\n• Zona H: Daerah tengah pita A yang hanya berisi miosin.",
+                diagramSvg: `<svg width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="20" y1="10" x2="20" y1="70" stroke="#000" stroke-width="2"/>
+                    <line x1="250" y1="10" x2="250" y1="70" stroke="#000" stroke-width="2"/>
+                    <line x1="20" y1="30" x2="100" y1="30" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="170" y1="30" x2="250" y1="30" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="80" y1="50" x2="190" y1="50" stroke="#ef4444" stroke-width="5"/>
+                    <text x="135" y="75" font-size="9" text-anchor="middle" fill="#334155">Pita A (Miosin) & Zona H</text>
+                </svg>`,
+                question: "Berdasarkan teori pergeseran filamen (Sliding Filament Theory), perubahan dimensi zona sarkomer yang terjadi saat otot berkontraksi maksimal adalah...",
+                options: [
+                    "A. Panjang Pita A memendek, sedangkan Zona H dan Pita I tetap konstan",
+                    "B. Garis Z menjauh, Zona H membesar, dan Pita A menghilang",
+                    "C. Panjang Pita A TETAP, sedangkan Pita I dan Zona H MEMENDEK hingga menghilang",
+                    "D. Filamen aktin dan miosin keduanya mengalami pemendekan molekuler sebesar 30%",
+                    "E. Pita I melebar dua kali lipat akibat penyusutan miosin"
+                ],
+                correct: 2,
+                explanation: "Saat kontraksi, filamen aktin miring/bergeser di atas miosin. Panjang miosin (Pita A) TETAP KONSTAN, sementara daerah non-overlap yaitu Pita I dan Zona H memendek."
+            },
+            {
+                id: 15,
+                stimulus: "Peran ion Kalsium (Ca2+) dan ATP pada mekanisme kontraksi otot lurik disimulasikan dalam eksperimen in vitro:\n• Kondisi 1: Diberi ATP + Tanpa Ca2+ -> Otot Tetap Relaksasi\n• Kondisi 2: Diberi ATP + Diberi Ca2+ -> Otot Berkontraksi Laju Tinggi\n• Kondisi 3: Ca2+ Ada + Tanpa ATP (Habis) -> Otot Mengalami Rigor Mortis (Kaku)",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="35" r="20" fill="#fde047"/><text x="50" y="39" font-size="9" font-weight="bold" text-anchor="middle">ATP</text>
+                    <text x="90" y="40" font-size="14 font-weight-bold">+</text>
+                    <circle cx="130" cy="35" r="20" fill="#a7f3d0"/><text x="130" y="39" font-size="9" font-weight="bold" text-anchor="middle">Ca2+</text>
+                    <text x="170" y="40" font-size="14 font-weight-bold">=</text>
+                    <rect x="190" y="20" width="60" height="30" fill="#ef4444" rx="4"/><text x="220" y="38" font-size="9" fill="#fff" text-anchor="middle">Kontraksi</text>
+                </svg>`,
+                question: "Alasan molekuler mengapa ketiadaan ATP pada Kondisi 3 menyebabkan kaku otot (rigor mortis) adalah...",
+                options: [
+                    "A. Ca2+ tidak dapat mengikat troponin C secara efektif",
+                    "B. Kepala miosin tidak dapat terlepas dari sisi aktif aktin karena pelepasan jembatan silang (cross-bridge) membutuhkan ATP baru",
+                    "C. Asetilkolin menumpuk secara berlebihan di celah sinapsis",
+                    "D. Filamen aktin terdegradasi total oleh enzim protease",
+                    "E. Retikulum sarkoplasma memompa kalsium keluar dari sel"
+                ],
+                correct: 1,
+                explanation: "ATP diperlukan untuk memutus ikatan antara kepala miosin dan filament aktin. Ketika ATP habis (seperti setelah kematian), kepala miosin terkunci pada aktin, memicu kekakuan (rigor mortis)."
+            },
+            {
+                id: 16,
+                stimulus: "Perbandingan dua tipe serat otot rangka pada manusia:\n• Serat Tipe I (Slow-Twitch): Kandungan Mioglobin Tinggi, Mitokondria Melimpah, Kapiler Banyak, Respirasi Aerobik Tinggi (Tahan Lelah).\n• Serat Tipe IIx (Fast-Twitch): Kandungan Mioglobin Rendah, Glikogen Tinggi, Jalur Glikolisis Anaerobik Cepat (Cepat Lelah, Daya Ledak Tinggi).",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="15" width="100" height="40" fill="#be123c" rx="4"/><text x="70" y="38" font-size="9" fill="#fff" text-anchor="middle">Tipe I (Merah/Aerob)</text>
+                    <rect x="140" y="15" width="100" height="40" fill="#f1f5f9" stroke="#94a3b8" rx="4"/><text x="190" y="38" font-size="9" fill="#334155" text-anchor="middle">Tipe IIx (Putih/Anaerob)</text>
+                </svg>`,
+                question: "Seorang atlet angkat beban (powerlifter) yang membutuhkan daya ledak otot maksimal dalam waktu 3 detik akan lebih dominan memanfaatkan...",
+                options: [
+                    "A. Serat Tipe I dengan pembakaran asam lemak",
+                    "B. Serat Tipe IIx dengan pemecahan ATP-Fosfokreatin dan Glikolisis Anaerobik",
+                    "C. Otot Polos pada organ pencernaan",
+                    "D. Serat Tipe I yang diperkaya oleh mioglobin ekstra",
+                    "E. Kombinasi serat otot jantung dan otot polos"
+                ],
+                correct: 1,
+                explanation: "Aktivitas berdaya ledak tinggi berskala detik (seperti angkat beban) mengandalkan serat otot Tipe IIx (Fast Glycolytic) yang bekerja cepat melalui sistem fosfagen dan glikolisis anaerobik."
+            },
+            {
+                id: 17,
+                stimulus: "Gambar struktur Neuron beserta bagian-bagiannya:\n1. Dendrit\n2. Badan Sel (Soma) memuat Badan Nissl\n3. Akson\n4. Selubung Mielin (dihasilkan Sel Schwann)\n5. Nodus Ranvier",
+                diagramSvg: `<svg width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="20" fill="#fde047" stroke="#ca8a04"/>
+                    <text x="40" y="44" font-size="9" text-anchor="middle">2 (Soma)</text>
+                    <line x1="60" y1="40" x2="230" y1="40" stroke="#475569" stroke-width="4"/>
+                    <rect x="80" y="30" width="30" height="20" fill="#38bdf8" rx="3"/>
+                    <text x="95" y="43" font-size="8" text-anchor="middle">4 (Mielin)</text>
+                    <rect x="130" y="30" width="30" height="20" fill="#38bdf8" rx="3"/>
+                    <line x1="115" y1="30" x2="115" y1="50" stroke="#ef4444" stroke-width="2"/>
+                    <text x="115" y="22" font-size="8" text-anchor="middle">5 (Nodus)</text>
+                </svg>`,
+                question: "Fungsi Nodus Ranvier (5) dalam mempercepat hantaran impuls saraf melalui mekanisme konduksi loncat (saltatory conduction) adalah...",
+                options: [
+                    "A. Mencegah keluarnya neurotransmiter dari badan sel",
+                    "B. Menjadi area tanpa mielin yang kaya saluran Na+ terkonduksi voltase sehingga potensial aksi meloncat dari nodus ke nodus",
+                    "C. Menyintesis selubung mielin baru secara terus menerus",
+                    "D. Mengubah sinyal listrik menjadi sinyal kimia secara langsung",
+                    "E. Menyerap kelebihan ion K+ di luar akson"
+                ],
+                correct: 1,
+                explanation: "Selubung mielin berlaku sebagai isolator listrik. Depolarisasi hanya terjadi pada daerah tanpa mielin (Nodus Ranvier), memungkinkan potensial aksi 'meloncat' cepat (saltatory conduction)."
+            },
+            {
+                id: 18,
+                stimulus: "Penyakit Multiple Sclerosis (MS) merupakan gangguan autoimun di mana sistem imun menyerang dan merusak selubung mielin pada sistem saraf pusat (otak dan medula spinalis).",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="25" width="200" height="20" fill="#e2e8f0" stroke="#64748b"/>
+                    <path d="M 50 20 L 70 50 M 110 20 L 130 50 M 170 20 L 190 50" stroke="#ef4444" stroke-width="3"/>
+                    <text x="130" y="62" font-size="9" fill="#ef4444" text-anchor="middle">Demielinisasi Akson</text>
+                </svg>`,
+                question: "Jenis sel glia pada sistem saraf pusat yang secara langsung menjadi sasaran kerusakan pada penderita Multiple Sclerosis adalah...",
+                options: [
+                    "A. Sel Schwann",
+                    "B. Oligodendrosit",
+                    "C. Astrosit",
+                    "D. Mikroglia",
+                    "E. Sel Ependim"
+                ],
+                correct: 1,
+                explanation: "Oligodendrosit adalah sel neuroglia yang membentuk selubung mielin pada Sistem Saraf Pusat (SSP). Sel Schwann membentuk mielin pada Sistem Saraf Tepi (SST)."
+            },
+            {
+                id: 19,
+                stimulus: "Eksperimen pengukuran kecepatan konduksi impuls saraf pada 4 jenis serat saraf (A, B, C, D):\n• Saraf A: Diameter 20 µm, Mielin (+), Kecepatan = 120 m/s\n• Saraf B: Diameter 10 µm, Mielin (+), Kecepatan = 60 m/s\n• Saraf C: Diameter 5 µm, Mielin (+), Kecepatan = 30 m/s\n• Saraf D: Diameter 1 µm, Mielin (-), Kecepatan = 1 m/s",
+                diagramSvg: `<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="20" y1="70" x2="240" y1="70" stroke="#94a3b8"/>
+                    <line x1="20" y1="70" x2="20" y1="10" stroke="#94a3b8"/>
+                    <path d="M 20 70 L 220 20" stroke="#10b981" stroke-width="3"/>
+                    <text x="130" y="30" font-size="9" fill="#047857">Kecepatan vs Diameter & Mielin</text>
+                </svg>`,
+                question: "Berdasarkan data numerik tersebut, kesimpulan yang paling tepat mengenai faktor pemandu kecepatan impuls adalah...",
+                options: [
+                    "A. Kecepatan impuls berbanding terbalik dengan diameter akson",
+                    "B. Adanya mielin dan semakin besarnya diameter akson meningkatkan kecepatan konduksi impuls secara eksponensial/linear",
+                    "C. Keberadaan mielin menurunkan kecepatan impuls sebesar 50%",
+                    "D. Diameter akson tidak memiliki pengaruh terhadap kecepatan konduksi",
+                    "E. Saraf tanpa mielin memiliki kecepatan tertinggi pada suhu dingin"
+                ],
+                correct: 1,
+                explanation: "Kecepatan hantaran hantaran saraf berbanding lurus dengan diameter akson (menurunkan hambatan internal) dan keberadaan selubung mielin (saltatory conduction)."
+            },
+            {
+                id: 20,
+                stimulus: "Suatu Neurotoksin 'Tetrodotoxin' (TTX) yang diisolasi dari ikan buntal memblokir secara selektif Voltage-Gated Sodium Channels (Saluran Na+ terkonduksi voltase) pada membran sel saraf.",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="40" width="210" height="10" fill="#334155"/>
+                    <circle cx="125" cy="25" r="12" fill="#ef4444"/><text x="125" y="29" font-size="8" fill="#fff" text-anchor="middle">TTX</text>
+                    <path d="M 125 37 L 125 55" stroke="#ef4444" stroke-width="3" stroke-dasharray="2"/>
+                    <text x="125" y="65" font-size="8" text-anchor="middle">Saluran Na+ Terkunci</text>
+                </svg>`,
+                question: "Dampak fisiologis langsung dari pemberian TTX terhadap grafik potensial aksi sel saraf adalah...",
+                options: [
+                    "A. Mencegah fase Depolarisasi sehingga potensial aksi gagal terbentuk",
+                    "B. Mempercepat fase Repolarisasi ion K+",
+                    "C. Memicu hiperpolarisasi permanen pada -100 mV",
+                    "D. Meningkatkan pelepasan asetilkolin di ujung akson",
+                    "E. Menyebabkan potensial istirahat naik menjadi +30 mV"
+                ],
+                correct: 0,
+                explanation: "Depolarisasi potensial aksi bergantung pada influx ion Na+ melalui saluran Na+ terkonduksi voltase. Jika diblokir TTX, Na+ tidak dapat masuk, membatalkan fase depolarisasi dan transmisi impuls."
+            },
+            {
+                id: 21,
+                stimulus: "Histologi kelenjar eksokrin pankreas menunjukkan adanya asinus pankreas (sel asinar) yang kaya akan Retikulum Endoplasma Kasar (RER) dan Kompleks Golgi, serta vesikel sekretori.",
+                diagramSvg: `<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="120" cy="40" r="30" fill="#fbcfe8" stroke="#db2777" stroke-width="2"/>
+                    <circle cx="120" cy="40" r="10" fill="#9d174d"/>
+                    <text x="120" y="78" font-size="9" text-anchor="middle">Sel Asinar Pankreas</text>
+                </svg>`,
+                question: "Melimpahnya organel RER dan Kompleks Golgi pada sel jaringan epitel kelenjar ini selaras dengan fungsinya untuk...",
+                options: [
+                    "A. Menyintesis dan mengemas enzim-enzim pencernaan (makanan) berbasis protein",
+                    "B. Menyerap glukosa darah secara difusi terfasilitasi",
+                    "C. Memproduksi hormon steroid seperti estrogen",
+                    "D. Menguraikan racun H2O2 menggunakan enzim peroksison",
+                    "E. Menyimpan cadangan glikogen dalam jumlah besar"
+                ],
+                correct: 0,
+                explanation: "Sel asinar pankreas memproduksi dan menyekresikan enzim pencernaan (seperti tripsinogen, amilase, lipase) yang merupakan makromolekul protein, memerlukan RER dan Golgi ekstensif."
+            },
+            {
+                id: 22,
+                stimulus: "Pengamatan jaringan mukosa trakea manusia menunjukkan adanya epitel silindris bersilia berlapisan semu (pseudostratified ciliated columnar) yang diselingi sel goblet.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="30" width="220" height="30" fill="#fed7aa" stroke="#f97316"/>
+                    <line x1="30" y1="30" x2="30" y1="15" stroke="#c2410c" stroke-width="2"/>
+                    <line x1="50" y1="30" x2="50" y1="15" stroke="#c2410c" stroke-width="2"/>
+                    <line x1="70" y1="30" x2="70" y1="15" stroke="#c2410c" stroke-width="2"/>
+                    <text x="130" y="50" font-size="9" text-anchor="middle">Silia + Lendir Mukus</text>
+                </svg>`,
+                question: "Seorang perokok berat mengalami paralisis (kelumpuhan) silia pada sel epitel trakeanya. Dampak klinis paling mendasar pada saluran pernapasannya adalah...",
+                options: [
+                    "A. Peningkatan daya tampung vital paru-paru",
+                    "B. Kegagalan eskalator mukosiliar dalam mengeluarkan debu/patogen sehingga memicu batuk kronis & risiko infeksi",
+                    "C. Epitel trakea menipis menjadi epitel pipih selapis",
+                    "D. Produksi lendir oleh sel goblet terhenti total",
+                    "E. Kecepatan difusi oksigen di trakea meningkat pesat"
+                ],
+                correct: 1,
+                explanation: "Silia pada trakea berfungsi mengayuh mukus yang menangkap partikel asing keluar dari saluran pernapasan (eskalator mukosiliar). Lumpuhnya silia menyebabkan penumpukan dahak dan mikroba."
+            },
+            {
+                id: 23,
+                stimulus: "Seseorang mengalami luka bakarnya cukup parah hingga lapisan dermis kulit terkelupas total. Dermis mengandung jaringan ikat dengan kapiler darah, ujung saraf, folikel rambut, dan kelenjar.",
+                diagramSvg: `<svg width="250" height="80" viewBox="0 0 250 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="10" width="210" height="15" fill="#fca5a5"/><text x="125" y="22" font-size="8" text-anchor="middle">Epidermis</text>
+                    <rect x="20" y="27" width="210" height="40" fill="#fde047"/><text x="125" y="50" font-size="9" font-weight="bold" text-anchor="middle">Dermis (Terusakkan)</text>
+                </svg>`,
+                question: "Kerusakan jaringan ikat pada lapisan dermis secara langsung mengakibatkan pasien kehilangan kemampuan untuk...",
+                options: [
+                    "A. Melakukan proses pembelahan sel stratum korneum",
+                    "B. Menerasakan rangsangan sentuhan/rasa sakit serta mengalami pendarahan jaringan",
+                    "C. Menyerap sinar ultraviolet untuk pencernaan",
+                    "D. Menyimpan glikogen otot",
+                    "E. Menyekresikan hormon melatonin"
+                ],
+                correct: 1,
+                explanation: "Dermis adalah jaringan ikat kaya pembuluh darah dan ujung reseptor saraf (Meissner, Pacini, nosiseptor). Kerusakan dermis menghilangkan sensasi saraf dan merusak vaskularisasi."
+            },
+            {
+                id: 24,
+                stimulus: "Uji kultur sel tulang in vitro menunjukkan pemberian obat Z menonaktifkan V-ATPase proton pump pada sel osteoklas.",
+                diagramSvg: `<svg width="240" height="70" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 30 50 Q 80 10 130 50 Q 180 90 220 50" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <text x="125" y="35" font-size="9" text-anchor="middle" fill="#dc2626">Inhibisi Osteoklas</text>
+                </svg>`,
+                question: "Dampak langsung dari inaktivasi osteoklas ini terhadap struktur matriks tulang keras adalah...",
+                options: [
+                    "A. Osteoklas gagal menyekresikan asam (H+) dan katepsin K untuk melarutkan kalsium/matriks (penyerapan tulang terhenti)",
+                    "B. Osteoblas berhenti menyintesis serat kolagen",
+                    "C. Pembentukan kanalikuli terhenti total",
+                    "D. Matriks tulang berubah menjadi kartilago elastis",
+                    "E. Kerapuhan tulang meningkat dua kali lipat dalam 1 jam"
+                ],
+                correct: 0,
+                explanation: "Osteoklas merusak/resorpsi matriks tulang dengan memompa asam (H+) melalui V-ATPase untuk melarutkan kalsium hidroksiapatit dan merilis katepsin K untuk mencerna kolagen."
+            },
+            {
+                id: 25,
+                stimulus: "Tabel perbandingan jenis-jenis sel leukosit agranulosit:\n• Sel X: Inti bulat besar memenuhi hampir seluruh sel, berperan dalam imunitas spesifik (Sel T & Sel B).\n• Sel Y: Ukuran sel paling besar, inti berbentuk ginjal/tapal kuda, berdiferensiasi menjadi makrofag di jaringan.",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="40" r="22" fill="#d8b4fe"/>
+                    <circle cx="60" cy="40" r="18" fill="#6b21a8"/><text x="60" y="72" font-size="9" text-anchor="middle">Sel X</text>
+                    <circle cx="180" cy="40" r="26" fill="#e2e8f0"/>
+                    <path d="M 170 30 Q 190 30 190 50 Q 170 50 170 30" fill="#475569"/><text x="180" y="74" font-size="9" text-anchor="middle">Sel Y</text>
+                </svg>`,
+                question: "Identifikasi sel X dan sel Y yang tepat adalah...",
+                options: [
+                    "A. Sel X = Neutrofil; Sel Y = Eosinofil",
+                    "B. Sel X = Limfosit; Sel Y = Monosit",
+                    "C. Sel X = Monosit; Sel Y = Limfosit",
+                    "D. Sel X = Basofil; Sel Y = Trombosit",
+                    "E. Sel X = Makrofag; Sel Y = Sel Mast"
+                ],
+                correct: 1,
+                explanation: "Sel X dengan inti bulat besar adalah Limfosit (imunitas adaptif/spesifik). Sel Y terbesar berinti bentuk ginjal adalah Monosit (prekursor Makrofag)."
+            },
+            {
+                id: 26,
+                stimulus: "Pemeriksaan imunohistokimia pada sinapsis neuromuscular junction (NMJ) menunjukkan keberadaan enzim Asetilkolinesterase (AChE) di celah sinaps.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="15" width="220" height="15" fill="#93c5fd"/><text x="130" y="26" font-size="8" text-anchor="middle">Ujung Akson Pre-sinaps</text>
+                    <rect x="20" y="45" width="220" height="15" fill="#fca5a5"/><text x="130" y="56" font-size="8" text-anchor="middle">Membran Sel Otot Post-sinaps</text>
+                    <circle cx="80" cy="37" r="4" fill="#eab308"/>
+                    <circle cx="170" cy="37" r="4" fill="#eab308"/>
+                    <text x="130" y="38" font-size="8" fill="#ef4444" font-weight="bold" text-anchor="middle">Enzim AChE</text>
+                </svg>`,
+                question: "Jika obat racun gas saraf memblokir fungsi enzim Asetilkolinesterase (AChE) secara permanen, efek fisiologis pada jaringan otot rangka adalah...",
+                options: [
+                    "A. Otot tidak dapat berkontraksi sama sekali (lumpuh layu)",
+                    "B. Asetilkolin terus mengikat reseptor memicu depolarisasi berkelanjutan, menyebabkan kejang/kontraksi tetanic konstan",
+                    "C. Otot langsung mengalami atrofi dalam hitungan detik",
+                    "D. Pelepasan kalsium dari retikulum sarkoplasma terhenti total",
+                    "E. Miosin terlepas dari aktin secara spontan"
+                ],
+                correct: 1,
+                explanation: "Enzim AChE menguraikan asetilkolin untuk mengakhiri sinyal kontraksi. Jika AChE diinhibisi, asetilkolin menumpuk di NMJ, merangsang otot secara berlebihan hingga kejang tetanus permanen."
+            },
+            {
+                id: 27,
+                stimulus: "Pasien penderita Sindrom Ehlers-Danlos mengalami mutasi genetik yang mengganggu sintesis Kolagen Tipe I dan Tipe III.",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 30 35 Q 80 10 130 35 Q 180 60 230 35" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="4"/>
+                    <text x="130" y="60" font-size="9" text-anchor="middle" fill="#0284c7">Kelainan Struktur Kolagen</text>
+                </svg>`,
+                question: "Gejala klinis utama yang muncul pada jaringan tubuh pasien tersebut adalah...",
+                options: [
+                    "A. Tulang rapuh dan mudah patah akibat kekurangan kalsium murni",
+                    "B. Hiperelastisitas kulit, kelenturan sendi berlebihan (hypermobility), dan kerapuhan pembuluh darah",
+                    "C. Kehilangan kemampuan pembekuan darah total",
+                    "D. Kelumpuhan sistem saraf tepi secara progresif",
+                    "E. Penumpukan lemak adipose berlebih di organ dalam"
+                ],
+                correct: 1,
+                explanation: "Kolagen memberikan kekuatan regang pada jaringan ikat (kulit, tendon, ligamen, dan dinding pembuluh darah). Gangguan kolagen memicu Sendi Sangat Lentur (hypermobility) dan Kulit Sangat Mulur (hiperelastisitas)."
+            },
+            {
+                id: 28,
+                stimulus: "Suatu pengukuran laju pemendekan sarkomer pada otot lurik menghasilkan data:\n• Pemendekan maksimum = 0,8 µm per sarkomer.\n• Jumlah sarkomer tersusun seri dalam satu miofibril = 10.000 sarkomer.",
+                diagramSvg: `<svg width="260" height="60" viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="220" height="20" fill="#f87171" stroke="#dc2626"/>
+                    <text x="130" y="34" font-size="9" fill="#fff" text-anchor="middle">10.000 Sarkomer Seri</text>
+                </svg>`,
+                question: "Berapa total pemendekan panjang miofibril tersebut saat berkontraksi maksimal?",
+                options: [
+                    "A. 8 µm (0,008 mm)",
+                    "B. 80 µm (0,08 mm)",
+                    "C. 800 µm (0,8 mm)",
+                    "D. 8.000 µm (8,0 mm)",
+                    "E. 80.000 µm (80 mm)"
+                ],
+                correct: 3,
+                explanation: "Total pemendekan = Pemendekan per sarkomer x Jumlah sarkomer seri = 0,8 µm x 10.000 = 8.000 µm = 8,0 mm."
+            },
+            {
+                id: 29,
+                stimulus: "Pengamatan preparat epitel transisional pada organ vesika urinaria (kandung kemih) saat kondisi kosong versus kondisi penuh terisi urin.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="15" width="80" height="40" fill="#fed7aa"/><text x="60" y="38" font-size="8" text-anchor="middle">Kosong (Tebal/Payung)</text>
+                    <rect x="160" y="25" width="80" height="20" fill="#fed7aa"/><text x="200" y="38" font-size="8" text-anchor="middle">Penuh (Gepeng/Tipis)</text>
+                </svg>`,
+                question: "Ciri khas perubahan morfologi sel epitel transisional saat kandung kemih terisi penuh oleh urin adalah...",
+                options: [
+                    "A. Sel-sel lapisan permukaan (sel payung) merenggang dan memipih dari kuboid menjadi gepeng untuk menampung volume cairan",
+                    "B. Sel epitel terlepas dan larut dalam urin",
+                    "C. Jumlah lapisan sel bertambah dua kali lipat secara mitosis cepat",
+                    "D. Epitel mengeras dan membentuk lapisan keratin tebal",
+                    "E. Epitel berubah fungsi menjadi kelenjar endokrin"
+                ],
+                correct: 0,
+                explanation: "Epitel transisional dirancang dapat meregang. Saat vesika urinaria meregang terisi urin, bentuk sel berubah dari bulat/kuboid/payung menjadi lebih pipih tebalnya berkurang."
+            },
+            {
+                id: 30,
+                stimulus: "Sel glia Astrosit merupakan komponen penting membentuk Dapar Darah-Otak (Blood-Brain Barrier / BBB). Astrosit memiliki juluran kaki (foot processes) yang membungkus kapiler darah otak.",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="125" cy="35" r="25" fill="#a7f3d0"/>
+                    <path d="M 60 35 L 100 35 M 150 35 L 190 35" stroke="#059669" stroke-width="4"/>
+                    <text x="125" y="38" font-size="9" text-anchor="middle" font-weight="bold">Astrosit & BBB</text>
+                </svg>`,
+                question: "Fungsi utama persambungan ketat (tight junctions) endotel dan astrosit pada Blood-Brain Barrier tersebut adalah...",
+                options: [
+                    "A. Mempercepat laju masuknya semua jenis toksin ke sel saraf",
+                    "B. Mencegah masuknya zat beracun, patogen, dan makromolekul dari darah ke cairan serebrospinal otak secara selektif",
+                    "C. Menghasilkan selubung mielin bagi akson di dalam otak",
+                    "D. Memfagositosis debris sel saraf yang mati",
+                    "E. Menyintesis sel darah merah di dalam otak"
+                ],
+                correct: 1,
+                explanation: "BBB yang dibentuk endotel rapat dan juluran astrosit melindungi jaringan otak dari fluktuasi kimia darah, toksin, dan kuman penyakit secara selektif."
+            },
+            {
+                id: 31,
+                stimulus: "Matriks ekstraseluler (ECM) jaringan ikat mengandung Glikosaminoglikan (GAGs) seperti Asam Hialuronat dan Kondroitin Sulfat yang bersifat sangat hidrofilik (mengikat molekul air).",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="20" width="190" height="30" fill="#e0f2fe" stroke="#0284c7" rx="6"/>
+                    <circle cx="60" cy="35" r="6" fill="#38bdf8"/><text x="60" y="38" font-size="7" text-anchor="middle" fill="#fff">H2O</text>
+                    <circle cx="100" cy="35" r="6" fill="#38bdf8"/><text x="100" y="38" font-size="7" text-anchor="middle" fill="#fff">H2O</text>
+                    <circle cx="140" cy="35" r="6" fill="#38bdf8"/><text x="140" y="38" font-size="7" text-anchor="middle" fill="#fff">H2O</text>
+                    <text x="125" y="62" font-size="9" text-anchor="middle">GAGs Mengikat Banyak H2O</text>
+                </svg>`,
+                question: "Sifat hidrofilik dari GAGs pada matriks ekstraseluler memberikan keunggulan mekanis jaringan yaitu...",
+                options: [
+                    "A. Mencegah penyebaran ion kalsium di persendiaaan",
+                    "B. Membentuk gel terhidrasi yang tahan terhadap tekanan mekanis (compression resistance) dan melumasi persendian",
+                    "C. Menyebabkan jaringan ikat menjadi sangat kaku dan mudah patah",
+                    "D. Menghambat difusi nutrisi ke sel-sel fibroblas",
+                    "E. Mempercepat degradasi serat elastin"
+                ],
+                correct: 1,
+                explanation: "GAGs menarik molekul H2O bermuatan positif, membentuk gel turgid bermuatan air yang berfungsi menahan beban tekanan (tahan kompresi) dan pelumas sendi."
+            },
+            {
+                id: 32,
+                stimulus: "Gambar mikroskopi jaringan otot jantung menunjukkan struktur khas 'Intercalated Disc' yang mengandung dua jenis junctional complex: Fascia Adherens/Desmosom dan Gap Junction.",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="15" width="80" height="40" fill="#fda4af"/>
+                    <rect x="140" y="15" width="80" height="40" fill="#fda4af"/>
+                    <line x1="110" y1="15" x2="110" y1="55" stroke="#be123c" stroke-width="4"/>
+                    <text x="125" y="65" font-size="8" text-anchor="middle" font-weight="bold">Diskus Interkalaris</text>
+                </svg>`,
+                question: "Peran Gap Junction pada intercalated disc otot jantung sangat penting untuk fisiologi jantung karena...",
+                options: [
+                    "A. Mencegah penyebaran impuls listrik antar sel otot",
+                    "B. Memungkinkan pasase ion secara langsung antar kardiomiosit sehingga seluruh atrium/ventrikel berkontraksi sinkron (sinsitium fungsional)",
+                    "C. Menghasilkan tenaga kontraksi mekanis secara mandiri",
+                    "D. Tempat melekatnya tendon pada tulang dada",
+                    "E. Memompa darah masuk ke dalam bilik jantung secara aktif"
+                ],
+                correct: 1,
+                explanation: "Gap junction memiliki saluran ion pori yang memungkingkan arus aksi potensial menyebar cepat langsung dari satu kardiomiosit ke kardiomiosit tetangga (sinsitium fungsional)."
+            },
+            {
+                id: 33,
+                stimulus: "Analisis komponen sel plasma darah: Trombosit (Keping Darah) berasal dari fragmentasi sitoplasma sel raksasa berinti banyak di sumsum tulang belakang.",
+                diagramSvg: `<svg width="240" height="70" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="35" r="25" fill="#fed7aa" stroke="#f97316"/>
+                    <path d="M 100 35 L 140 35" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                    <circle cx="160" cy="30" r="4" fill="#ea580c"/>
+                    <circle cx="175" cy="40" r="5" fill="#ea580c"/>
+                    <circle cx="190" cy="28" r="4" fill="#ea580c"/>
+                    <text x="60" y="68" font-size="8" text-anchor="middle">Megakariosit</text>
+                    <text x="175" y="68" font-size="8" text-anchor="middle">Trombosit</text>
+                </svg>`,
+                question: "Nama sel raksasa di sumsum tulang yang terfragmentasi menghasilkan trombosit adalah...",
+                options: [
+                    "A. Osteoklas",
+                    "B. Megakariosit",
+                    "C. Erythroblast",
+                    "D. Fibroblas",
+                    "E. Monoblast"
+                ],
+                correct: 1,
+                explanation: "Trombosit bukanlah sel utuh melainkan fragmen sitoplasma terbungkus membran yang dilepaskan oleh Megakariosit di sumsum tulang."
+            },
+            {
+                id: 34,
+                stimulus: "Skema regenerasi jaringan saraf tepi (PNS) pasca transeksi (pemotongan) akson:\nTerjadi Degenerasi Wallerian pada bagian distal akson, diikuti pembentukan lorong regenerasi (regeneration tube) oleh sel glia.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="25" width="80" height="15" fill="#cbd5e1"/>
+                    <path d="M 105 20 L 105 45" stroke="#ef4444" stroke-width="2" stroke-dasharray="2"/>
+                    <rect x="115" y="25" width="120" height="15" fill="#bae6fd" stroke="#0284c7"/>
+                    <text x="175" y="52" font-size="8" text-anchor="middle">Sel Schwann (Regeneration Tube)</text>
+                </svg>`,
+                question: "Sel glia pada sistem saraf tepi yang memandu pertumbuhan kembali (sprouting) ujung akson yang terpotong adalah...",
+                options: [
+                    "A. Astrosit",
+                    "B. Sel Schwann",
+                    "C. Oligodendrosit",
+                    "D. Mikroglia",
+                    "E. Sel Ependim"
+                ],
+                correct: 1,
+                explanation: "Sel Schwann di sistem saraf tepi memfagositosis debris dan membelah membentuk 'regeneration tube' (pemandu) untuk mengarahkan regenerasi akson ke organ target."
+            },
+            {
+                id: 35,
+                stimulus: "Pengamatan sel mast (mast cell) di bawah mikroskopik jaringan ikat longgar menunjukkan granula basofilik kaya Histamin dan Heparin.",
+                diagramSvg: `<svg width="240" height="70" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="120" cy="35" r="22" fill="#fbcfe8" stroke="#db2777"/>
+                    <circle cx="110" cy="28" r="3" fill="#831843"/>
+                    <circle cx="130" cy="32" r="3" fill="#831843"/>
+                    <circle cx="115" cy="42" r="3" fill="#831843"/>
+                    <text x="120" y="68" font-size="8" text-anchor="middle">Granula Histamin & Heparin</text>
+                </svg>`,
+                question: "Dampak pelepasan Histamin dari sel mast saat terjadi reaksi alergi atau luka inflamasi adalah...",
+                options: [
+                    "A. Vasokonstriksi pembuluh darah dan penurunan permeabilitas kapiler",
+                    "B. Vasodilatasi (pelebaran) pembuluh darah dan peningkatan permeabilitas kapiler memicu pembengkakan (edema)",
+                    "C. Pembekuan darah instan di seluruh jaringan ikat",
+                    "D. Destruksi matriks kolagen secara masif",
+                    "E. Penurunan aliran darah ke area cedera"
+                ],
+                correct: 1,
+                explanation: "Histamin memicu Vasodilatasi arteriol dan meningkatkan permeabilitas kapiler sehingga cairan plasma keluar ke jaringan (membuat kemerahan dan pembengkakan/edema)."
+            },
+            {
+                id: 36,
+                stimulus: "Data numerik rasio luas permukaan terhadap volume (SA/V ratio) pada beberapa bentuk sel epitel:\n• Sel Gepeng (Pipih): SA/V = 8,5 µm^-1\n• Sel Kubus: SA/V = 3,2 µm^-1\n• Sel Silindris Tinggi: SA/V = 2,1 µm^-1",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="30" width="60" height="10" fill="#10b981"/><text x="50" y="55" font-size="8" text-anchor="middle">SA/V = 8,5</text>
+                    <rect x="100" y="20" width="30" height="30" fill="#3b82f6"/><text x="115" y="60" font-size="8" text-anchor="middle">SA/V = 3,2</text>
+                    <rect x="170" y="10" width="25" height="50" fill="#f59e0b"/><text x="182" y="70" font-size="8" text-anchor="middle">SA/V = 2,1</text>
+                </svg>`,
+                question: "Berdasarkan rasio SA/V tersebut, alasan utama sel pipih selapis paling efisien ditempatkan pada alveolus paru-paru adalah...",
+                options: [
+                    "A. Rasio SA/V paling tinggi meminimalkan jarak lintasan difusi gas O2/CO2 per unit volume",
+                    "B. Memiliki volume sel terbesar untuk menampung O2 cair",
+                    "C. Lebih tahan terhadap gesekan udara dibanding sel silindris",
+                    "D. Mampu membelah 10 kali lebih cepat dari sel kubus",
+                    "E. Mencegah masuknya kalsium ke kapiler"
+                ],
+                correct: 0,
+                explanation: "Sel pipih memiliki rasio luas permukaan terhadap volume (SA/V) tertinggi dan ketebalan terendah, memaksimalkan laju difusi pasif gas sesuai Hukum Fick."
+            },
+            {
+                id: 37,
+                stimulus: "Proses ossifikasi endokondral pada pembentukan tulang panjang janin dimulai dari cetakan kartilago hialin.",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="25" width="200" height="20" fill="#e0f2fe" stroke="#0284c7"/>
+                    <rect x="110" y="20" width="40" height="30" fill="#fca5a5" stroke="#ef4444"/>
+                    <text x="130" y="62" font-size="8" text-anchor="middle">Pusat Ossifikasi Primer (Diafisis)</text>
+                </svg>`,
+                question: "Urutan tahap pembentukan tulang keras pada diafisis dari cetakan rawan hialin yang benar adalah...",
+                options: [
+                    "A. Kartilago hialin -> Kalsifikasi matriks & kematian kondrosit -> Penetrasi pembuluh darah & Osteoblas -> Pembentukan Osteon",
+                    "B. Osteoblas -> Kartilago hialin -> Osteoklas -> Osteosit",
+                    "C. Pembentukan osteon -> Pembentukan rawan hialin -> Penyerapan kalsium",
+                    "D. Fibroblas -> Sel Schwann -> Osteosit -> Pembuluh darah",
+                    "E. Kalsifikasi langsung jaringan ikat padat tanpa rawan"
+                ],
+                correct: 0,
+                explanation: "Ossifikasi endokondral: cetakan kartilago hialin mengalami kalsifikasi matriks, kondrosit mati, pembuluh darah membawa sel osteogenik/osteoblas untuk membentuk matriks tulang keras."
+            },
+            {
+                id: 38,
+                stimulus: "Seorang pasien diuji fungsi saraf sensorik dan motoriknya. Didapatkan hasil bahwa potensial istirahat membran neuron berubah dari -70 mV menjadi -90 mV (Hiperpolarisasi).",
+                diagramSvg: `<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="20" y1="20" x2="230" y1="20" stroke="#94a3b8" stroke-dasharray="2"/><text x="235" y="22" font-size="7">-70mV</text>
+                    <path d="M 20 20 L 80 20 L 120 50 L 230 50" fill="none" stroke="#ef4444" stroke-width="3"/>
+                    <text x="235" y="52" font-size="7">-90mV</text>
+                </svg>`,
+                question: "Penyebab utama timbulnya kondisi hiperpolarisasi (semakin negatifnya potensial membran) pada neuron tersebut adalah...",
+                options: [
+                    "A. Pembukaan saluran ion K+ atau Cl- secara berlebihan sehingga ion positif K+ keluar sel atau ion Cl- masuk sel",
+                    "B. Masuknya ion Na+ secara masif ke dalam sel saraf",
+                    "C. Penutupan total seluruh saluran ion membran sel",
+                    "D. Pompa Na+/K+-ATPase berhenti bekerja total",
+                    "E. Kehancuran selubung mielin akson"
+                ],
+                correct: 0,
+                explanation: "Hiperpolarisasi terjadi saat potensial membran menjadi lebih negatif (-90 mV), dipicu oleh masuknya ion Cl- (muatan negatif) atau keluarnya ion K+ (muatan positif)."
+            },
+            {
+                id: 39,
+                stimulus: "Pemeriksaan sediaan preparat apusan darah (blood smear) pasien menunjukkan fenomena Rouleaux (eritrosit menumpuk seperti tumpukan koin) disertai peningkatan Laju Endap Darah (LED) hingga 60 mm/jam (Normal < 15 mm/jam).",
+                diagramSvg: `<svg width="240" height="70" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="60" cy="35" rx="12" ry="5" fill="#ef4444"/>
+                    <ellipse cx="60" cy="30" rx="12" ry="5" fill="#ef4444"/>
+                    <ellipse cx="60" cy="25" rx="12" ry="5" fill="#ef4444"/>
+                    <text x="60" y="55" font-size="8" text-anchor="middle">Eritrosit Rouleaux</text>
+                    <rect x="150" y="10" width="15" height="50" fill="#e2e8f0" stroke="#64748b"/>
+                    <rect x="150" y="35" width="15" height="25" fill="#ef4444"/>
+                    <text x="180" y="35" font-size="8">LED Tinggi</text>
+                </svg>`,
+                question: "Penyebab biokimia utama terjadinya fenomena Rouleaux dan tingginya LED pada kondisi inflamasi tersebut adalah...",
+                options: [
+                    "A. Peningkatan konsentrasi protein fase akut plasma (seperti Fibrinogen dan Globulin) yang menetralisir muatan negatif (sialic acid) antar-eritrosit",
+                    "B. Penurunan kadar hemoglobin di dalam eritrosit",
+                    "C. Kerusakan total sel membran leukosit",
+                    "D. Penurunan jumlah trombosit hingga < 50.000 /µL",
+                    "E. Mutasi genetik pada saluran ion kalsium"
+                ],
+                correct: 0,
+                explanation: "Peningkatan protein plasma reaktan fase akut (Fibrinogen) mengurangi potensial Zeta (muatan repulsif negatif sialic acid) eritrosit, membuat sel menyatu menumpuk (Rouleaux) dan mengendap cepat (LED naik)."
+            },
+            {
+                id: 40,
+                stimulus: "Satu unit motorik (motor unit) pada jaringan otot rangka terdiri dari satu neuron motorik dan seluruh serat otot yang dipersarafinya. Perbandingan rasio unit motorik:\n• Otot Mata Ekstrinsik: 1 Neuron mengontrol 5 Serat Otot (Rasio 1:5)\n• Otot Gastrocnemius (Betis): 1 Neuron mengontrol 1.000 Serat Otot (Rasio 1:1000)",
+                diagramSvg: `<svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="35" r="10" fill="#3b82f6"/><text x="50" y="58" font-size="8" text-anchor="middle">Mata (1:5)</text>
+                    <circle cx="180" cy="35" r="22" fill="#ef4444"/><text x="180" y="68" font-size="8" text-anchor="middle">Betis (1:1000)</text>
+                </svg>`,
+                question: "Keuntungan fisiologis dari kecilnya rasio unit motorik (1:5) pada otot pergerakan mata adalah...",
+                options: [
+                    "A. Mampu menghasilkan gaya angkat beban hingga 100 kg",
+                    "B. Memberikan kontrol pergerakan yang sangat halus, presisi, dan akurat tinggi",
+                    "C. Menghemat penggunaan ATP hingga 99%",
+                    "D. Mencegah kelelahan otot mata selamanya",
+                    "E. Mempercepat pembentukan serat kolagen tipe I"
+                ],
+                correct: 1,
+                explanation: "Rasio unit motorik yang kecil (sedikit serat otot per neuron) memberikan presisi dan kontrol pergerakan yang halus (fine motor control), seperti gerakan bola mata dan jari tangan."
+            }
+        ];
+
+        /* --- STATE VARIABLES --- */
+        let currentUser = null;
+        let currentQuizIndex = 0;
+        let userAnswers = new Array(quizDatabase.length).fill(null);
+        let bookmarkedQuestions = new Array(quizDatabase.length).fill(false);
+        let remainingSeconds = 90 * 60; // 90 minutes
+        let timerInterval = null;
+        let antiCheatTriggered = false;
+        let attemptNumber = 1;
+
+        /* --- INITIALIZATION & ACCOUNT MANAGEMENT --- */
+        window.addEventListener('DOMContentLoaded', () => {
+            setupAntiCheat();
+        });
+
+        function setupAntiCheat() {
+            // Anti Cheat: Detect Tab Switching or Window Minimizing
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden && currentUser && !antiCheatTriggered) {
+                    antiCheatTriggered = true;
+                    alert("PERINGATAN ANTI-CHEAT!\nAnda terdeteksi berpindah tab/jendela. Ujian Anda secara otomatis dihentikan dan dikumpulkan!");
+                    forceSubmitQuiz("Pelanggaran Anti-Cheat (Pindah Tab/Window)");
+                }
+            });
+
+            window.addEventListener("blur", () => {
+                if (currentUser && !antiCheatTriggered) {
+                    antiCheatTriggered = true;
+                    alert("PERINGATAN ANTI-CHEAT!\nFokus jendela browser hilang. Ujian otomatis dikumpulkan!");
+                    forceSubmitQuiz("Pelanggaran Anti-Cheat (Kehilangan Fokus Browser)");
+                }
+            });
+        }
+
+        function getStudentKey(name, className) {
+            return `exam_attempt_${name.trim().toLowerCase().replace(/\s+/g, '_')}_${className.trim().toLowerCase().replace(/\s+/g, '_')}`;
+        }
+
+        function startQuiz(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById("input-name").value.trim();
+            const classInput = document.getElementById("input-class").value.trim();
+
+            if (!nameInput || !classInput) return;
+
+            const studentKey = getStudentKey(nameInput, classInput);
+            let attempts = parseInt(localStorage.getItem(studentKey) || "0");
+
+            if (attempts >= 2) {
+                alert(`MOHON MAAF!\nAkun atas nama "${nameInput}" dari kelas "${classInput}" SUDAH MENGERJAKAN 2 KALI (Batas Maksimal).\n\nSilakan hubungi Guru Biologi Anda jika memerlukan reset.`);
+                return;
+            }
+
+            attemptNumber = attempts + 1;
+            localStorage.setItem(studentKey, attemptNumber);
+
+            currentUser = {
+                name: nameInput,
+                class: classInput,
+                attempt: attemptNumber,
+                startTime: new Date().toISOString()
+            };
+
+            // Setup Header Bar
+            document.getElementById("top-header").classList.remove("hidden");
+            document.getElementById("bar-student-name").innerText = currentUser.name;
+            document.getElementById("bar-student-class").innerText = currentUser.class;
+
+            // Switch Views
+            document.getElementById("view-welcome").classList.add("hidden");
+            document.getElementById("view-quiz").classList.remove("hidden");
+
+            renderQuestionGrid();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        /* --- TIMER --- */
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    alert("WAKTU HABIS!\nUjian Anda otomatis dikumpulkan.");
+                    forceSubmitQuiz("Waktu Ujian Habis");
+                }
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById("time-display").innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        /* --- QUESTION RENDERER --- */
+        function loadQuestion(index) {
+            currentQuizIndex = index;
+            const q = quizDatabase[index];
+
+            document.getElementById("current-q-num").innerText = index + 1;
+            document.getElementById("stimulus-container").innerText = q.stimulus;
+            document.getElementById("visual-container").innerHTML = q.diagramSvg || '';
+            document.getElementById("question-text").innerText = q.question;
+
+            // Render Options
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const optBtn = document.createElement("div");
+                optBtn.className = `p-3.5 md:p-4 rounded-xl border-2 transition cursor-pointer flex items-start gap-3 ${
+                    isSelected 
+                    ? 'border-emerald-600 bg-emerald-50/80 text-emerald-900 font-semibold shadow-sm' 
+                    : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700'
+                }`;
+                optBtn.onclick = () => selectOption(optIdx);
+
+                optBtn.innerHTML = `
+                    <div class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        isSelected ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300'
+                    }">
+                        ${isSelected ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+                    </div>
+                    <span class="text-xs md:text-sm leading-relaxed">${optText}</span>
+                `;
+                container.appendChild(optBtn);
+            });
+
+            // Update Navigation Buttons
+            document.getElementById("btn-prev").disabled = (index === 0);
+            const btnNext = document.getElementById("btn-next");
+            if (index === quizDatabase.length - 1) {
+                btnNext.innerHTML = `Selesai <i class="fa-solid fa-check"></i>`;
+                btnNext.onclick = confirmSubmitQuiz;
+            } else {
+                btnNext.innerHTML = `Selanjutnya <i class="fa-solid fa-arrow-right"></i>`;
+                btnNext.onclick = nextQuestion;
+            }
+
+            // Update Bookmark state
+            const bmBtn = document.getElementById("btn-bookmark");
+            if (bookmarkedQuestions[index]) {
+                bmBtn.className = "text-amber-500 p-1.5 rounded-lg transition";
+                bmBtn.innerHTML = `<i class="fa-solid fa-bookmark text-lg"></i>`;
+            } else {
+                bmBtn.className = "text-slate-400 hover:text-amber-500 p-1.5 rounded-lg transition";
+                bmBtn.innerHTML = `<i class="fa-regular fa-bookmark text-lg"></i>`;
+            }
+
+            updateGridButtons();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuizIndex] = optIdx;
+            loadQuestion(currentQuizIndex);
+            updateAnsweredCount();
+        }
+
+        function toggleBookmark() {
+            bookmarkedQuestions[currentQuizIndex] = !bookmarkedQuestions[currentQuizIndex];
+            loadQuestion(currentQuizIndex);
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizDatabase.length - 1) {
+                loadQuestion(currentQuizIndex + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuizIndex > 0) {
+                loadQuestion(currentQuizIndex - 1);
+            }
+        }
+
+        /* --- NAVIGATOR GRID --- */
+        function renderQuestionGrid() {
+            const grid = document.getElementById("question-grid");
+            grid.innerHTML = "";
+
+            quizDatabase.forEach((_, idx) => {
+                const btn = document.createElement("button");
+                btn.id = `grid-btn-${idx}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => loadQuestion(idx);
+                grid.appendChild(btn);
+            });
+            updateGridButtons();
+        }
+
+        function updateGridButtons() {
+            quizDatabase.forEach((_, idx) => {
+                const btn = document.getElementById(`grid-btn-${idx}`);
+                if (!btn) return;
+
+                let cls = "h-9 w-full rounded-lg font-bold text-xs transition border flex items-center justify-center ";
+                if (idx === currentQuizIndex) {
+                    cls += "ring-2 ring-emerald-500 ring-offset-1 ";
+                }
+
+                if (bookmarkedQuestions[idx]) {
+                    cls += "bg-amber-400 text-amber-950 border-amber-500";
+                } else if (userAnswers[idx] !== null) {
+                    cls += "bg-emerald-600 text-white border-emerald-700";
+                } else {
+                    cls += "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+                }
+                btn.className = cls;
+            });
+            updateAnsweredCount();
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answered-count-badge").innerText = `${count}/40 Terjawab`;
+        }
+
+        /* --- SUBMISSION & SCORE CALCULATION --- */
+        function confirmSubmitQuiz() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Apakah Anda yakin ingin mengumpulkan ujian ini sekarang?";
+            if (unanswered > 0) {
+                msg = `Masih ada ${unanswered} soal yang belum dijawab!\nYakin ingin mengumpulkan?`;
+            }
+
+            if (confirm(msg)) {
+                forceSubmitQuiz("Diselesaikan Normal oleh Peserta");
+            }
+        }
+
+        function forceSubmitQuiz(statusReason) {
+            clearInterval(timerInterval);
+
+            // Calculate Score
+            let correctCount = 0;
+            let wrongCount = 0;
+            let emptyCount = 0;
+
+            quizDatabase.forEach((q, idx) => {
+                if (userAnswers[idx] === null) {
+                    emptyCount++;
+                } else if (userAnswers[idx] === q.correct) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            const score = Math.round((correctCount / quizDatabase.length) * 100);
+
+            // Save Result to Creator/Teacher Database (LocalStorage)
+            const submissionRecord = {
+                studentName: currentUser.name,
+                studentClass: currentUser.class,
+                attempt: currentUser.attempt,
+                score: score,
+                correct: correctCount,
+                wrong: wrongCount,
+                empty: emptyCount,
+                status: statusReason,
+                timestamp: new Date().toLocaleString("id-ID")
+            };
+
+            saveToTeacherDatabase(submissionRecord);
+
+            // Show Result Screen
+            document.getElementById("view-quiz").classList.add("hidden");
+            document.getElementById("top-header").classList.add("hidden");
+            document.getElementById("view-result").classList.remove("hidden");
+
+            document.getElementById("result-student-detail").innerText = `Siswa: ${currentUser.name} | Kelas: ${currentUser.class}`;
+            document.getElementById("final-score-display").innerText = score;
+            document.getElementById("count-correct").innerText = correctCount;
+            document.getElementById("count-wrong").innerText = wrongCount;
+            document.getElementById("count-empty").innerText = emptyCount;
+            document.getElementById("attempt-number-badge").innerText = `${currentUser.attempt} / 2`;
+
+            // Predicate
+            let pred = "Perlu Belajar Lagi";
+            if (score >= 90) pred = "Sangat Memuaskan (Level OSN/TKA Master)";
+            else if (score >= 75) pred = "Baik (Kompeten Fase F)";
+            else if (score >= 60) pred = "Cukup (Perlu Penguatan Numerasi)";
+            document.getElementById("score-predicate").innerText = pred;
+        }
+
+        function saveToTeacherDatabase(record) {
+            let db = JSON.parse(localStorage.getItem("teacher_quiz_results") || "[]");
+            db.push(record);
+            localStorage.setItem("teacher_quiz_results", JSON.stringify(db));
+        }
+
+        /* --- REVIEW DISCUSSION MODE --- */
+        function showReviewMode() {
+            const container = document.getElementById("review-container");
+            const list = document.getElementById("review-list");
+            container.classList.remove("hidden");
+            list.innerHTML = "";
+
+            quizDatabase.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.correct;
+                const isUnanswered = userAns === null;
+
+                const item = document.createElement("div");
+                item.className = `p-5 rounded-2xl border ${
+                    isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-red-50/50 border-red-200'
+                }`;
+
+                let statusBadge = isCorrect 
+                    ? `<span class="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-check"></i> BENAR</span>`
+                    : `<span class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-xmark"></i> SALAH / KOSONG</span>`;
+
+                let userAnsText = isUnanswered ? "<i class='text-slate-400'>Tidak Dijawab</i>" : q.options[userAns];
+
+                item.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-xs text-slate-500">Soal No. ${idx + 1}</span>
+                        ${statusBadge}
+                    </div>
+                    <p class="font-semibold text-slate-800 text-sm mb-3">${q.question}</p>
+                    <div class="space-y-1 text-xs mb-3">
+                        <div class="text-slate-600">Jawaban Anda: <span class="font-bold">${userAnsText}</span></div>
+                        <div class="text-emerald-700 font-bold">Kunci Jawaban: ${q.options[q.correct]}</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
+                        <span class="font-bold text-emerald-800 block flex items-center gap-1">
+                            <i class="fa-solid fa-lightbulb"></i> Pembahasan HOTS:
+                        </span>
+                        <p class="leading-relaxed">${q.explanation}</p>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* --- TEACHER DASHBOARD LOGIC --- */
+        function openTeacherDashboard() {
+            document.getElementById("view-welcome").classList.add("hidden");
+            document.getElementById("view-teacher-dashboard").classList.remove("hidden");
+            renderTeacherTable();
+        }
+
+        function closeTeacherDashboard() {
+            document.getElementById("view-teacher-dashboard").classList.add("hidden");
+            document.getElementById("view-welcome").classList.remove("hidden");
+        }
+
+        function renderTeacherTable() {
+            const db = JSON.parse(localStorage.getItem("teacher_quiz_results") || "[]");
+            const tbody = document.getElementById("teacher-table-body");
+            document.getElementById("total-submissions-count").innerText = db.length;
+            tbody.innerHTML = "";
+
+            if (db.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center p-6 text-slate-400">Belum ada data nilai tersimpan.</td></tr>`;
+                return;
+            }
+
+            db.forEach((rec, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold">${idx + 1}</td>
+                    <td class="p-3 font-semibold text-slate-900">${rec.studentName}</td>
+                    <td class="p-3">${rec.studentClass}</td>
+                    <td class="p-3 text-center"><span class="bg-slate-200 px-2 py-0.5 rounded text-xs font-bold">${rec.attempt}</span></td>
+                    <td class="p-3 text-center font-extrabold text-emerald-600">${rec.score}</td>
+                    <td class="p-3 text-center text-xs">${rec.correct}/${rec.wrong}/${rec.empty}</td>
+                    <td class="p-3 text-center">
+                        <span class="text-[10px] px-2 py-0.5 rounded font-bold ${
+                            rec.status.includes('Anti-Cheat') ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700'
+                        }">${rec.status}</span>
+                    </td>
+                    <td class="p-3 text-xs text-slate-500">${rec.timestamp}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function exportToCSV() {
+            const db = JSON.parse(localStorage.getItem("teacher_quiz_results") || "[]");
+            if (db.length === 0) {
+                alert("Tidak ada data untuk diexport!");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,No,Nama Siswa,Kelas,Percobaan Ke,Skor,Benar,Salah,Kosong,Status,Waktu Submit\n";
+            db.forEach((r, idx) => {
+                csvContent += `${idx + 1},"${r.studentName}","${r.studentClass}",${r.attempt},${r.score},${r.correct},${r.wrong},${r.empty},"${r.status}","${r.timestamp}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Rekap_Nilai_HOTS_Jaringan_Hewan_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function clearAllData() {
+            if (confirm("APAKAH ANDA YAKIN?\nSeluruh rekap nilai siswa dan data percobaan akan DIHAPUS PERMANEN!")) {
+                localStorage.removeItem("teacher_quiz_results");
+                renderTeacherTable();
+            }
+        }
+    </script>
+</body>
+</html>
